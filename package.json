@@ -1,0 +1,21 @@
+{
+  "name": "project-mill-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leadpython/project-mill-backend.git"
+  },
+  "author": "leadpython",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leadpython/project-mill-backend/issues"
+  },
+  "homepage": "https://github.com/leadpython/project-mill-backend#readme",
+  "dependencies": {
+  }
+}
