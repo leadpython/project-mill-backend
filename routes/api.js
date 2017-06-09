@@ -1,20 +1,21 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/ninjas', (request, response) => {
-  response.send( { type: 'GET' })
+router.get('/vendors', (request, response) => {
+  response.send( { type: 'GET' });
 })
 
-router.post('/ninjas', (request, response) => {
-  response.send( { type: 'POST' })
+router.post('/vendors', (request, response) => {
+  console.log(request.body);
+  response.send( { type: 'POST', body: request.body });
 })
 
-router.put('/ninjas/:id', (request, response) => {
-  response.send( { type: 'PUT' })
+router.put('/vendors/:id', (request, response) => {
+  response.send( { type: 'PUT' });
 })
 
-router.delete('/ninjas/:id', (request, response) => {
-  response.send( { type: 'POST' })
+router.delete('/vendors/:id', (request, response) => {
+  response.send( { type: 'POST' });
 })
 
 module.exports = router;
