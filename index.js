@@ -1,9 +1,8 @@
 const express = require('express');
 const app = new express();
+const routes = require('./routes/api');
 
-app.get('/api', (request, response) => {
-  response.send({ name: 'Jeff' });
-})
+app.use('/api', routes);
 
 app.listen( 3000, () => {
   console.log('App is listening to port ' + 3000);
