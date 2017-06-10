@@ -1,6 +1,6 @@
 const Vendor = require('../models/vendor');
 
-export default class VendorRoute {
+class VendorRoute {
   retrieveVendors(request, response) {
     Vendor.find({}).then((vendors) => {
       response.send(vendors);
@@ -24,3 +24,6 @@ export default class VendorRoute {
     });
   }
 }
+
+const vendorRoute = new VendorRoute();
+module.exports = vendorRoute;

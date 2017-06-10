@@ -5,7 +5,7 @@ const router = express.Router();
 const Vendor = require('../models/vendor');
 
 // Routes
-const VendorsRoute = require('vendors.route');
+const VendorsRoute = require('./vendors.route');
 
 router.get('/vendors', (request, response) => {
   VendorsRoute.retrieveVendors(request, response);

@@ -10,6 +10,6 @@ app.use(bodyParser.json());
 mongoose.Promise = global.Promise;
 app.use('/api', routes);
 
-app.listen( 3000, () => {
-  console.log('App is listening to port ' + 3000);
+app.listen(process.env.port || 3000, () => {
+  console.log('App is listening to port ' + process.env.port || 3000);
 });
