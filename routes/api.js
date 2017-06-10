@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// Models
-const Vendor = require('../models/vendor');
-
 // Routes
 const VendorsRoute = require('./vendors.route');
 
