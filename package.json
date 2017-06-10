@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js & mongod"
+    "prestart": "mongod",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
