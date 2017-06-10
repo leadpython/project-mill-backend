@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js && mongod"
+    "start": "node index.js & mongod"
   },
   "repository": {
     "type": "git",
