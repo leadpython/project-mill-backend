@@ -10,12 +10,14 @@ const VendorSchema = new Schema({
     type: String,
     required: [true, 'Username required.']
   },
+  password: {
+    type: String,
+    required: [true, 'Password required']
+  },
   email: {
     type: String,
     required: [true, 'Email required.']
   }
 });
 
-const Vendor = mongoose.model('vendor', VendorSchema);
-
-module.exports = Vendor;
+module.exports = mongoose.model('vendor', VendorSchema);
