@@ -17,7 +17,7 @@ router.put('/vendors/:id', (request, response) => {
 });
 
 router.delete('/vendors/:id', (request, response) => {
-  VendorRoute.deleteVendor(request, response);
+  VendorsRoute.deleteVendor(request, response);
 });
 
 module.exports = router;

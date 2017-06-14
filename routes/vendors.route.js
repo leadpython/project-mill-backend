@@ -8,6 +8,7 @@ class VendorRoute {
   }
   addVendor(request, response) {
     Vendor.create(request.body).then((vendor) => {
+      console.log(vendor);
       response.send('You have added Vendor:\n' + vendor);
     });
   }
@@ -18,7 +19,7 @@ class VendorRoute {
       });
     });
   }
-  deletedVendor(request, response) {
+  deleteVendor(request, response) {
     Vendor.findOneAndRemove({_id: request.params.id}).then((vendor) => {
       response.send('You deleted this vendor:\n' + vendor);
     });
@@ -27,3 +28,4 @@ class VendorRoute {
 
 const vendorRoute = new VendorRoute();
 module.exports = vendorRoute;
+
