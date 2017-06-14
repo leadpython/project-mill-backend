@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const routes = require('./routes/api');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mill');
+mongoose.connect('mongodb://project-mill-backend.herokuapp.com/mill');
 
 app.use(bodyParser.json());
 mongoose.Promise = global.Promise;
