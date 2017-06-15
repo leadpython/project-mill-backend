@@ -1,10 +1,10 @@
 const mongoUtility = require('./../mongoUtilities');
 const database = mongoUtility.getDatabase();
-const VendorsCollection = database.collection('vendors');
+
 
 class VendorRoute {
   retrieveVendors(request, response) {
-    VendorsCollection.find({}).toArray((error, data) => {
+    database.collection('vendors').find({}).toArray((error, data) => {
       if (error) {
         handleError(response, error.message, "Failed to get contacts.");
       } else {
