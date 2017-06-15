@@ -1,10 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongodb = require("mongodb");
-const mongoUtility = require('./mongoUtilities');
+var mongoUtility = require('./mongoUtilities');
 const routes = require('./routes/api');
-
 var app = express();
+
 app.use(bodyParser.json());
 app.use('/api', routes);
 

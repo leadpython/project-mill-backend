@@ -1,6 +1,5 @@
-const mongoUtility = require('./../mongoUtilities');
-let database = mongoUtility.getDatabase();
-
+var mongoUtility = require('./../mongoUtilities');
+var database = mongoUtility.getDatabase();
 
 class VendorRoute {
   retrieveVendors(request, response) {
