@@ -1,5 +1,5 @@
 const mongoUtility = require('./../mongoUtilities');
-const database = mongoUtility.getDatabase();
+let database = mongoUtility.getDatabase();
 
 
 class VendorRoute {
