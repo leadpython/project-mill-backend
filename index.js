@@ -3,7 +3,7 @@ var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 
-var CONTACTS_COLLECTION = "contacts";
+var CONTACTS_COLLECTION = "vendors";
 
 var app = express();
 app.use(bodyParser.json());
@@ -37,12 +37,12 @@ function handleError(res, reason, message, code) {
   res.status(code || 500).json({"error": message});
 }
 
-/*  "/api/contacts"
+/*  "/api/vendors"
  *    GET: finds all contacts
  *    POST: creates a new contact
  */
 
-app.get("/api/contacts", function(req, res) {
+app.get("/api/vendors", function(req, res) {
   db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get contacts.");
@@ -52,7 +52,7 @@ app.get("/api/contacts", function(req, res) {
   });
 });
 
-app.post("/api/contacts", function(req, res) {
+app.post("/api/vendors", function(req, res) {
   var newContact = req.body;
   newContact.createDate = new Date();
 
@@ -69,13 +69,13 @@ app.post("/api/contacts", function(req, res) {
   });
 });
 
-/*  "/api/contacts/:id"
+/*  "/api/vendors/:id"
  *    GET: find contact by id
  *    PUT: update contact by id
  *    DELETE: deletes contact by id
  */
 
-app.get("/api/contacts/:id", function(req, res) {
+app.get("/api/vendors/:id", function(req, res) {
   db.collection(CONTACTS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to get contact");
@@ -85,7 +85,7 @@ app.get("/api/contacts/:id", function(req, res) {
   });
 });
 
-app.put("/api/contacts/:id", function(req, res) {
+app.put("/api/vendors/:id", function(req, res) {
   var updateDoc = req.body;
   delete updateDoc._id;
 
@@ -99,7 +99,7 @@ app.put("/api/contacts/:id", function(req, res) {
   });
 });
 
-app.delete("/api/contacts/:id", function(req, res) {
+app.delete("/api/vendors/:id", function(req, res) {
   db.collection(CONTACTS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
     if (err) {
       handleError(res, err.message, "Failed to delete contact");
