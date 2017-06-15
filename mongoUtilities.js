@@ -1,14 +1,14 @@
 var mongodb = require('mongodb');
-var _db;
+var db;
 
 module.exports = {
   connectToServer: function(callback) {
     mongodb.MongoClient.connect(process.env.MONGODB_URI, function(error, database) {
-      _db = database;
+      db = database;
       return callback(error);
     });
   },
   getDatabase: function() {
-    return _db;
+    return db;
   }
 };

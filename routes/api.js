@@ -1,8 +1,8 @@
-const express = require('express');
-const router = express.Router();
+var express = require('express');
+var router = express.Router();
 
 // Routes
-const VendorsRoute = require('./vendors.route');
+var VendorsRoute = require('./vendors.route');
 
 // Vendors Routes
 router.get('/vendors', (request, response) => {

@@ -1,9 +1,10 @@
 var mongoUtility = require('./../mongoUtilities');
 var database = mongoUtility.getDatabase();
+const collectionName = 'vendors';
 
 class VendorRoute {
   retrieveVendors(request, response) {
-    database.collection('vendors').find({}).toArray((error, data) => {
+    database.collection(collectionName).find({}).toArray((error, data) => {
       if (error) {
         handleError(response, error.message, "Failed to get contacts.");
       } else {
@@ -12,7 +13,7 @@ class VendorRoute {
     });
   }
   addVendor(request, response) {
-    database.collection('vendors').insertOne(request.body, function(error, data) {
+    database.collection(collectionName).insertOne(request.body, function(error, data) {
       if (error) {
         handleError(response, error.message, "Failed to create new contact.");
       } else {
