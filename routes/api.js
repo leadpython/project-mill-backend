@@ -1,22 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-var mongoUtility = require('./../mongoUtilities');
-var database = mongoUtility.getDatabase();
-const collectionName = 'vendors';
-
 // Routes
 var VendorsRoute = require('./vendors.route');
 
 // Vendors Routes
 router.get('/vendors', (request, response) => {
-    database.collection(collectionName).find({}).toArray((error, data) => {
-      if (error) {
-        handleError(response, error.message, "Failed to get contacts.");
-      } else {
-        response.status(200).json(data);
-      }
-    });
+  response.send("HELLO WORLD!");
+  // VendorsRoute.retrieveVendors(request, response);
 });
 
 router.post('/vendors', (request, response) => {
