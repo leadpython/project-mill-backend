@@ -1,31 +1,35 @@
-const Vendor = require('../models/vendor');
+const VendorsCollection = require('./../mongoUtilities').getDatabase().collection('vendors');
 
 class VendorRoute {
   retrieveVendors(request, response) {
-    Vendor.find({}).then((vendors) => {
-      response.send(vendors);
+    VendorsCollection.find({}).toArray((error, data) => {
+      if (error) {
+        handleError(response, error.message, "Failed to get contacts.");
+      } else {
+        response.status(200).json(data);
+      }
     });
   }
   addVendor(request, response) {
-    Vendor.create(request.body).then((vendor) => {
-      console.log(vendor);
-      response.send('You have added Vendor:\n' + vendor);
+    VendorsCollection.insertOne(request.body, function(error, data) {
+      if (error) {
+        handleError(response, error.message, "Failed to create new contact.");
+      } else {
+        response.status(201).json(data.ops[0]);
+      }
     });
   }
   updateVendor(request, response) {
-    Vendor.findOneAndUpdate( {_id: request.params.id}, request.body).then(() => {
-      Vendor.findOne({_id: request.params.id}).then((vendor) => {
-        response.send('Here is your updated vendor:\n' + vendor);
-      });
-    });
   }
   deleteVendor(request, response) {
-    Vendor.findOneAndRemove({_id: request.params.id}).then((vendor) => {
-      response.send('You deleted this vendor:\n' + vendor);
-    });
   }
 }
 
 const vendorRoute = new VendorRoute();
 module.exports = vendorRoute;
 
+// Generic error handler used by all endpoints.
+function handleError(res, reason, message, code) {
+  console.log("ERROR: " + reason);
+  res.status(code || 500).json({"error": message});
+}
