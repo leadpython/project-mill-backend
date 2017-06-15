@@ -2,8 +2,8 @@ var mongoUtility = require('./../mongoUtilities');
 var database = mongoUtility.getDatabase();
 const collectionName = 'vendors';
 
-class VendorRoute {
-  retrieveVendors(request, response) {
+const vendorRoute = {
+  retrieveVendors: (request, response) => {
     database.collection(collectionName).find({}).toArray((error, data) => {
       if (error) {
         handleError(response, error.message, "Failed to get contacts.");
@@ -11,8 +11,8 @@ class VendorRoute {
         response.status(200).json(data);
       }
     });
-  }
-  addVendor(request, response) {
+  },
+  addVendor: (request, response) => {
     database.collection(collectionName).insertOne(request.body, function(error, data) {
       if (error) {
         handleError(response, error.message, "Failed to create new contact.");
@@ -20,14 +20,13 @@ class VendorRoute {
         response.status(201).json(data.ops[0]);
       }
     });
-  }
-  updateVendor(request, response) {
-  }
-  deleteVendor(request, response) {
+  },
+  updateVendor: (request, response) => {
+  },
+  deleteVendor: (request, response) => {
   }
 }
 
-const vendorRoute = new VendorRoute();
 module.exports = vendorRoute;
 
 // Generic error handler used by all endpoints.
