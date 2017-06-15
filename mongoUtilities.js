@@ -3,8 +3,8 @@ var _db;
 
 module.exports = {
   connectToServer: function(callback) {
-    mongodb.MongoClient.connect(process.env.MONGODB_URI || 3000, function( error, database ) {
-      _db = db;
+    mongodb.MongoClient.connect(process.env.MONGODB_URI, function(error, database) {
+      _db = database;
       return callback(error);
     });
   },
