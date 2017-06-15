@@ -1,4 +1,6 @@
-var VendorsCollection = require('./../mongoUtilities').getDatabase().collection('vendors');
+const mongoUtility = require('./../mongoUtilities');
+const database = mongoUtility.getDatabase();
+const VendorsCollection = database.collection('vendors');
 
 class VendorRoute {
   retrieveVendors(request, response) {
