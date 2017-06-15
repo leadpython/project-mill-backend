@@ -4,12 +4,8 @@ const collectionName = 'vendors';
 
 const vendorRoute = {
   retrieveVendors: (request, response) => {
-    database.collection(collectionName).find({}).toArray((error, data) => {
-      if (error) {
-        handleError(response, error.message, "Failed to get contacts.");
-      } else {
-        response.status(200).json(data);
-      }
+    database.collection(collectionName).find({}).then((data) => {
+      response.send(data);
     });
   },
   addVendor: (request, response) => {
