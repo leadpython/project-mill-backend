@@ -1,4 +1,4 @@
-const mongodb = require('mongodb');
+var mongodb = require('mongodb');
 var _db;
 
 module.exports = {
