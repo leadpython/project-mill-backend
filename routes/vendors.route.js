@@ -12,7 +12,7 @@ class VendorRoute {
     });
   }
   addVendor(request, response) {
-    VendorsCollection.insertOne(request.body, function(error, data) {
+    database.collection('vendors').insertOne(request.body, function(error, data) {
       if (error) {
         handleError(response, error.message, "Failed to create new contact.");
       } else {
