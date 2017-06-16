@@ -4,14 +4,10 @@ const collectionName = 'vendors';
 
 class VendorRoute {
   retrieveVendors(request, response) {
-    response.send("HELLO WORLD BITCHES!")
-    // database.collection(collectionName).find({}).toArray((error, data) => {
-    //   if (error) {
-    //     handleError(response, error.message, "Failed to get contacts.");
-    //   } else {
-    //     response.status(200).json(data);
-    //   }
-    // });
+    database.collection(collectionName).find({}).toArray((error, data) => {
+      console.log(error.message);
+      response.status(200).json(data);
+    });
   }
   addVendor(request, response) {
     database.collection(collectionName).insertOne(request.body, function(error, data) {
