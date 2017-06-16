@@ -12,11 +12,12 @@ class VendorRoute {
     });
   }
   addVendor(request, response) {
+    response.send(JSON.stringify(request));
     _database.collection(collectionName).insertOne(request.body, function(error, data) {
       if (error) {
         handleError(response, error.message, "Failed to create new vendor.");
       } else {
-        response.status(201).json(data.ops[0]);
+        // response.status(201).json(data);
       }
     });
   }
