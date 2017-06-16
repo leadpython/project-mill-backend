@@ -1,22 +1,26 @@
 class VendorRoute {
-  retrieveVendors(request, response, database) {
-    database.collection('vendors').find({}).toArray((error, data) => {
-      response.send("AFTER HELLO!")
-      // response.status(200).json(data);
+  collectionName = 'vendors';
+  getVendors(request, response, database) {
+    database.collection(this.collectionName).find({}).toArray((error, data) => {
+      if (error) {
+        handleError(response, error.message, "Failed to get vendors.");
+      } else {
+        response.status(200).json(data);
+      }
     });
   }
   addVendor(request, response) {
-    database.collection(collectionName).insertOne(request.body, function(error, data) {
+    database.collection(this.collectionName).insertOne(request.body, function(error, data) {
       if (error) {
-        handleError(response, error.message, "Failed to create new contact.");
+        handleError(response, error.message, "Failed to create new vendor.");
       } else {
         response.status(201).json(data.ops[0]);
       }
     });
   }
-  updateVendor(request, response) {
+  updateVendor(request, response, database) {
   }
-  deleteVendor(request, response) {
+  deleteVendor(request, response, database) {
   }
 }
 
