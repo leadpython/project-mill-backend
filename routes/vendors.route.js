@@ -1,7 +1,6 @@
 class VendorRoute {
-  collectionName = 'vendors';
   getVendors(request, response, database) {
-    database.collection(this.collectionName).find({}).toArray((error, data) => {
+    database.collection('vendors').find({}).toArray((error, data) => {
       response.send("HEHEHE");
       // response.status(200).json(data);
     });
