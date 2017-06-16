@@ -1,12 +1,18 @@
+var collectionName = 'vendors';
+var _database;
+
 class VendorRoute {
-  getVendors(request, response, database) {
-    database.collection('vendors').find({}).toArray((error, data) => {
-      response.send("HEHEHE");
-      // response.status(200).json(data);
+  getVendors(request, response) {
+    _database.collection(collectionName).find({}).toArray((error, data) => {
+      if (error) {
+        handleError(response, error.message, "Failed to get vendors.");
+      } else {
+        response.status(200).json(data);
+      }
     });
   }
-  addVendor(request, response, database) {
-    database.collection(this.collectionName).insertOne(request.body, function(error, data) {
+  addVendor(request, response) {
+    _database.collection(collectionName).insertOne(request.body, function(error, data) {
       if (error) {
         handleError(response, error.message, "Failed to create new vendor.");
       } else {
@@ -14,9 +20,12 @@ class VendorRoute {
       }
     });
   }
-  updateVendor(request, response, database) {
+  updateVendor(request, response) {
   }
-  deleteVendor(request, response, database) {
+  deleteVendor(request, response) {
+  }
+  setDatabase(database) {
+    _database = database;
   }
 }
 
