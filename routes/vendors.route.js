@@ -3,11 +3,7 @@ class VendorRoute {
   getVendors(request, response, database) {
     database.collection(this.collectionName).find({}).toArray((error, data) => {
       response.send("HEHEHE");
-      if (error) {
-        handleError(response, error.message, "Failed to get vendors.");
-      } else {
-        response.status(200).json(data);
-      }
+      // response.status(200).json(data);
     });
   }
   addVendor(request, response, database) {
