@@ -1,8 +1,6 @@
-var VendorsCollection = require('../index').getDatabase().collection('vendors');
-
 class VendorRoute {
-  retrieveVendors(request, response) {
-    VendorsCollection.find({}).toArray((error, data) => {
+  retrieveVendors(request, response, database) {
+    database.collection('vendors').find({}).toArray((error, data) => {
       response.send("AFTER HELLO!")
       // response.status(200).json(data);
     });

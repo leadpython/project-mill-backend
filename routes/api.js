@@ -6,7 +6,7 @@ var VendorsRoute = require('./vendors.route.js');
 
 // Vendors Routes
 router.get('/vendors', (request, response) => {
-  VendorsRoute.retrieveVendors(request, response);
+  VendorsRoute.retrieveVendors(request, response, router._database);
 });
 
 router.post('/vendors', (request, response) => {
