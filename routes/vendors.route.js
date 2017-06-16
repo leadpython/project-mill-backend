@@ -4,9 +4,10 @@ const collectionName = 'vendors';
 
 class VendorRoute {
   retrieveVendors(request, response) {
+    response.send("HELLO!")
     database.collection(collectionName).find({}).toArray((error, data) => {
-      console.log(error.message);
-      response.status(200).json(data);
+      response.send("AFTER HELLO!")
+      // response.status(200).json(data);
     });
   }
   addVendor(request, response) {
