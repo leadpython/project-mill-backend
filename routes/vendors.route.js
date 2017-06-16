@@ -10,7 +10,7 @@ class VendorRoute {
       }
     });
   }
-  addVendor(request, response) {
+  addVendor(request, response, database) {
     database.collection(this.collectionName).insertOne(request.body, function(error, data) {
       if (error) {
         handleError(response, error.message, "Failed to create new vendor.");
