@@ -1,11 +1,8 @@
-var mongoUtility = require('./../mongoUtilities');
-var database = mongoUtility.getDatabase();
-const collectionName = 'vendors';
+var VendorsCollection = require('../index').getDatabase().collection('vendors');
 
 class VendorRoute {
   retrieveVendors(request, response) {
-    response.send('mongoutil: ' + mongoUtility);
-    database.collection(collectionName).find({}).toArray((error, data) => {
+    VendorsCollection.find({}).toArray((error, data) => {
       response.send("AFTER HELLO!")
       // response.status(200).json(data);
     });
