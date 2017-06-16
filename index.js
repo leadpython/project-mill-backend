@@ -7,6 +7,11 @@ var app = express();
 var VendorRoutes = require('./routes/vendors.route');
 
 app.use(bodyParser.json());
+app.use((request, response, next) => {
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 app.use('/api', routes);
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI, function(error, database) {

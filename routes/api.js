@@ -4,12 +4,6 @@ var router = express.Router();
 // Routes
 var VendorsRoute = require('./vendors.route.js');
 
-router.all('/', function(request, response, next) {
-  response.header("Access-Control-Allow-Origin", "*");
-  response.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
- });
-
 // Vendors Routes
 router.get('/vendors', (request, response) => {
   VendorsRoute.getVendors(request, response);
