@@ -16,7 +16,7 @@ class VendorRoute {
       if (error) {
         handleError(response, error.message, "Failed to create new vendor.");
       } else {
-        response.status(201).json(request.body);
+        response.status(201).json("hello");
       }
     });
   }
