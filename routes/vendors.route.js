@@ -25,7 +25,7 @@ class VendorRoute {
   deleteVendor(request, response) {
   }
   authenticateVendor(request, response) {
-    _database.collection(collectionName).find({ "username": "leadpython" }).toArray((error, data) => {
+    _database.collection(collectionName).findOne({ "username": "leadpython" }).toArray((error, data) => {
       if (error) {
         
       }
