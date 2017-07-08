@@ -16,7 +16,7 @@ class VendorRoute {
       if (error) {
         handleError(response, error.message, "Failed to create new vendor.");
       } else {
-        response.status(201).json("hello");
+        response.status(201).json(data.ops[0]);
       }
     });
   }
@@ -27,7 +27,7 @@ class VendorRoute {
   authenticateVendor(request, response) {
     _database.collection(collectionName).find({ "username": "leadpython" }).toArray((error, data) => {
       if (error) {
-
+        
       }
     })
   }
