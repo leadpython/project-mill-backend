@@ -9,6 +9,10 @@ router.get('/vendors', (request, response) => {
   VendorsRoute.getVendors(request, response);
 });
 
+router.post('/vendors/login', (request, response) => {
+  VendorsRoute.authenticateVendor(request, response);
+})
+
 router.post('/vendors', (request, response) => {
   VendorsRoute.addVendor(request, response);
 });

@@ -16,13 +16,20 @@ class VendorRoute {
       if (error) {
         handleError(response, error.message, "Failed to create new vendor.");
       } else {
-        response.status(201).json(data.ops[0]);
+        response.status(201).json(request.body);
       }
     });
   }
   updateVendor(request, response) {
   }
   deleteVendor(request, response) {
+  }
+  authenticateVendor(request, response) {
+    _database.collection(collectionName).find({ "username": "leadpython" }).toArray((error, data) => {
+      if (error) {
+
+      }
+    })
   }
   setDatabase(database) {
     _database = database;
