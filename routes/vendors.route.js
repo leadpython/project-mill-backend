@@ -26,7 +26,13 @@ class VendorRoute {
   }
   authenticateVendor(request, response) {
     _database.collection(collectionName).findOne({ "username": request.body.username }).then((data) => {
-      response.status(201).json(data);
+      if (data) {
+        if (data.password === request.body.password) {
+          response.status(201).json(true);
+        } else {
+          response.status(201).json(false);
+        }
+      }
     });
   }
   setDatabase(database) {
