@@ -8,8 +8,9 @@ var VendorRoutes = require('./routes/vendors.route');
 
 app.use(bodyParser.json());
 app.use((request, response, next) => {
-  response.header("Access-Control-Allow-Origin", "*");
-  response.header("Access-Control-Allow-Headers", "X-Requested-With");
+  response.header('Access-Control-Allow-Origin', '*');
+  response.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  response.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
 app.use('/api', routes);
