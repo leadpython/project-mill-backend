@@ -3,7 +3,7 @@ var _database;
 
 class VendorRoute {
   getVendors(request, response) {
-    _database.collection(collectionName).find({}).toArray((data) => {
+    _database.collection(collectionName).find({}).then((data) => {
       response.status(200).json(data);
     });
   }
@@ -41,7 +41,7 @@ class VendorRoute {
     _database.collection(collectionName).findOne({ "username": request.body.email }).then((data) => {
       if (data) {
         regInfo.doesUserExist = true;
-        // response.status(200).json(regInfo);
+        response.status(200).json(regInfo);
       } else {
         _database.collection(collectionName).insertOne(request.body).then((data) => {
           regInfo.registrationSuccess = true;
