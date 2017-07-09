@@ -35,12 +35,12 @@ class VendorRoute {
   }
   registerVendor(request, response) {
     let regInfo = {
-      userExists: false,
+      doesUserExist: false,
       registrationSuccess: false
     };
     _database.collection(collectionName).findOne({ "username": request.body.email }).then((data) => {
       if (data) {
-        regInfo.userExists = true;
+        regInfo.doesUserExist = true;
       } else {
         _database.collection(collectionName).insertOne(request.body).then(() => {
           regInfo.registrationSuccess = true;
