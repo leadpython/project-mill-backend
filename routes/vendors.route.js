@@ -34,14 +34,20 @@ class VendorRoute {
     });
   }
   registerVendor(request, response) {
+    let regInfo = {
+      userExists: false,
+      registrationSuccess: false
+    };
     _database.collection(collectionName).findOne({ "username": request.body.email }).then((data) => {
       if (data) {
-        response.status(200).json(false);
+        regInfo.userExists = true;
       } else {
         _database.collection(collectionName).insertOne(request.body).then(() => {
-          response.status(201).json("Registration is a success!");
+          regInfo.registrationSuccess = true;
+          response.status(201).json(regInfo);
         }, (error) => {
-          response.status(400).json("Registration failed!");
+          regInfo.registrationSuccess = false;
+          response.status(400).json(regInfo);
         });
       }
 
