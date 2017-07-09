@@ -3,8 +3,9 @@ var _database;
 
 class VendorRoute {
   getVendors(request, response) {
-    let vendors = _database.collection(collectionName).find({});
-    response.status(200).json(vendors);
+    let vendors = _database.collection(collectionName).find({}).toArray((error, data) => {
+      response.status(200).json(data);
+    });
   }
   updateVendor(request, response) {
   }
