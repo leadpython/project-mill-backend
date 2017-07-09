@@ -17,7 +17,7 @@ class VendorRoute {
       doesUserExist: false,
       isUserAuthenticated: false,
     };
-    _database.collection(collectionName).findOne({ "username": request.body.username }).then((data) => {
+    _database.collection(collectionName).findOne({ "email": request.body.username }).then((data) => {
       // Check if user exists
       if (data) {
         // user exists, proceed to authentication
