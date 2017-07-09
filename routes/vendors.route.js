@@ -3,21 +3,8 @@ var _database;
 
 class VendorRoute {
   getVendors(request, response) {
-    _database.collection(collectionName).find({}).toArray((error, data) => {
-      if (error) {
-        handleError(response, error.message, "Failed to get vendors.");
-      } else {
-        response.status(200).json(data);
-      }
-    });
-  }
-  addVendor(request, response) {
-    _database.collection(collectionName).insertOne(request.body, function(error, data) {
-      if (error) {
-        handleError(response, error.message, "Failed to create new vendor.");
-      } else {
-        response.status(201).json(data.ops[0]);
-      }
+    _database.collection(collectionName).find({}).toArray((data) => {
+      response.status(200).json(data);
     });
   }
   updateVendor(request, response) {
@@ -25,14 +12,28 @@ class VendorRoute {
   deleteVendor(request, response) {
   }
   authenticateVendor(request, response) {
+    // collects information regarding authentication
+    let authInfo = {
+      doesUserExist: false,
+      isUserAuthenticated: false,
+    };
     _database.collection(collectionName).findOne({ "username": request.body.username }).then((data) => {
+      // Check if user exists
       if (data) {
+        // user exists, proceed to authentication
+        authInfo.doesUserExist = true;
         if (data.password === request.body.password) {
-          response.status(201).json(true);
-        } else {
-          response.status(201).json(false);
+          // authentication success
+          authInfo.isUserAuthenticated = true;
         }
       }
+      // respond with authentication information
+      response.status(200).json(authInfo);
+    });
+  }
+  registerVendor(request, response) {
+    _database.collection(collectionName).insertOne(request.body).then((data) => {
+      response.status(201).json(data.ops[0]);
     });
   }
   setDatabase(database) {
@@ -42,9 +43,3 @@ class VendorRoute {
 
 const vendorRoute = new VendorRoute();
 module.exports = vendorRoute;
-
-// Generic error handler used by all endpoints.
-function handleError(res, reason, message, code) {
-  console.log("ERROR: " + reason);
-  res.status(code || 500).json({"error": message});
-}

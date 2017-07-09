@@ -13,6 +13,10 @@ router.post('/vendors/login', (request, response) => {
   VendorsRoute.authenticateVendor(request, response);
 })
 
+router.post('/vendors/register', (request, response) => {
+  VendorsRoute.registerVendor(request, response);
+})
+
 router.post('/vendors', (request, response) => {
   VendorsRoute.addVendor(request, response);
 });
