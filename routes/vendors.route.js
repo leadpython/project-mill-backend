@@ -34,10 +34,17 @@ class VendorRoute {
     });
   }
   registerVendor(request, response) {
-    _database.collection(collectionName).insertOne(request.body).then((data) => {
-      response.status(201).json("Registration is a success!");
-    }, (error) => {
-      response.status(400).json("Registration failed!");
+    _database.collection(collectionName).findOne({ "username": request.body.email }).then((data) => {
+      if (data) {
+        response.status(200).json(false);
+      } else {
+        _database.collection(collectionName).insertOne(request.body).then(() => {
+          response.status(201).json("Registration is a success!");
+        }, (error) => {
+          response.status(400).json("Registration failed!");
+        });
+      }
+
     });
   }
   setDatabase(database) {
