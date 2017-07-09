@@ -45,7 +45,7 @@ class VendorRoute {
       } else {
         _database.collection(collectionName).insertOne(request.body).then((data) => {
           regInfo.registrationSuccess = true;
-          response.status(201).json(regInfo);
+          response.status(201).json(data);
         }, (error) => {
           regInfo.registrationSuccess = false;
           response.status(400).json(regInfo);
