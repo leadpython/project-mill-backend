@@ -43,7 +43,7 @@ class VendorRoute {
         regInfo.doesUserExist = true;
           response.status(200).json(regInfo);
       } else {
-        _database.collection(collectionName).insertOne(request.body).then(() => {
+        _database.collection(collectionName).insertOne(request.body).then((data) => {
           regInfo.registrationSuccess = true;
           response.status(201).json(regInfo);
         }, (error) => {
