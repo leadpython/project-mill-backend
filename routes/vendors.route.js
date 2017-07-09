@@ -39,7 +39,6 @@ class VendorRoute {
       registrationSuccess: false
     };
     _database.collection(collectionName).findOne({ "email": request.body.email }).then((data) => {
-      response.status(200).json(data);
       if (data) {
         regInfo.doesUserExist = true;
         response.status(200).json(regInfo);
