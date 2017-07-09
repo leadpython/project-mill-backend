@@ -29,11 +29,15 @@ class VendorRoute {
       }
       // respond with authentication information
       response.status(200).json(authInfo);
+    }, (error) => {
+      response.status(400).json(false);
     });
   }
   registerVendor(request, response) {
     _database.collection(collectionName).insertOne(request.body).then((data) => {
-      response.status(201).json(data.ops[0]);
+      response.status(201).json("Registration is a success!");
+    }, (error) => {
+      response.status(400).json("Registration failed!");
     });
   }
   setDatabase(database) {
