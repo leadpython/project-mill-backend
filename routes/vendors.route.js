@@ -18,12 +18,12 @@ class VendorRoute {
       doesUserExist: false,
       isUserAuthenticated: false,
     };
-    _database.collection(collectionName).findOne({ "email": request.body.username }).then((data) => {
+    _database.collection(collectionName).findOne({ "email": request.body.email }).then((data) => {
       // Check if user exists
       if (data) {
         // user exists, proceed to authentication
         authInfo.doesUserExist = true;
-        if (data.password === request.body.password) {
+        if (data.credentials.hash === crypto.pbkdf2Sync(request.body.password, this.salt, 1000, 64).toString('hex')) {
           // authentication success
           authInfo.isUserAuthenticated = true;
         }
