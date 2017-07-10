@@ -29,7 +29,7 @@ class VendorRoute {
         }
       }
       // respond with authentication information
-      response.status(200).json(authInfo.isUserAuthenticated);
+      response.status(200).json(authInfo);
     }, (error) => {
       response.status(400).json(false);
     });
