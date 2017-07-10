@@ -53,7 +53,7 @@ class VendorRoute {
           firstname: request.body.firstname,
           lastname: request.body.lastname
         };
-        _database.collection(collectionName).insertOne(request.body).then((data) => {
+        _database.collection(collectionName).insertOne(userRecord).then((data) => {
           regInfo.registrationSuccess = true;
           response.status(201).json(regInfo);
         }, (error) => {
