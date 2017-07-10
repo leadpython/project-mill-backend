@@ -23,7 +23,7 @@ class VendorRoute {
       if (data) {
         // user exists, proceed to authentication
         authInfo.doesUserExist = true;
-        if (data.credentials.hash === crypto.pbkdf2Sync(request.body.password, this.salt, 1000, 64).toString('hex')) {
+        if (data.credentials.hash === crypto.pbkdf2Sync(request.body.password, data.credentials.salt, 1000, 64).toString('hex')) {
           // authentication success
           authInfo.isUserAuthenticated = true;
         }
