@@ -29,9 +29,8 @@ class VendorRoute {
 
           // generate token 
           authInfo.token = crypto.randomBytes(16).toString('hex');
-          authInfo.id = data.id;
+          authInfo.id = data._id;
           _database.collection(collectionName).update({ "email": request.body.email }, { $set: { "token": authInfo.token } });
-
         }
       }
       // respond with authentication information
