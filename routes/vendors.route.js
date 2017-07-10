@@ -26,6 +26,12 @@ class VendorRoute {
         if (data.credentials.hash === crypto.pbkdf2Sync(request.body.password, data.credentials.salt, 1000, 64).toString('hex')) {
           // authentication success
           authInfo.isUserAuthenticated = true;
+
+          // generate token 
+          authInfo.token = crypto.randomBytes(16).toString('hex');
+          authInfo.id = data.id;
+          _database.collection(collectionName).update({ "email": request.body.email }, { $set: { "token": authInfo.token } });
+
         }
       }
       // respond with authentication information
