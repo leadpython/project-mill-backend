@@ -1,3 +1,4 @@
+var crypto = require('crypto');
 var collectionName = 'vendors';
 var _database;
 
@@ -43,6 +44,15 @@ class VendorRoute {
         regInfo.doesUserExist = true;
         response.status(200).json(regInfo);
       } else {
+        let userRecord = {
+          email: request.body.email,
+          credentials: {
+            hash: this.salt = crypto.randomBytes(16).toString('hex'),
+            salt: crypto.pbkdf2Sync(request.body.password, this.salt, 1000, 64).toString('hex')
+          },
+          firstname: request.body.firstname,
+          lastname: request.body.lastname
+        };
         _database.collection(collectionName).insertOne(request.body).then((data) => {
           regInfo.registrationSuccess = true;
           response.status(201).json(regInfo);
