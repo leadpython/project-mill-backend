@@ -72,7 +72,7 @@ class VendorRoute {
   }
   checkSession(request, response) {
     let isSessionDone = false;
-    response.status(200).json(ObjectId(request.body.id));
+    response.status(200).json(ObjectId());
     // _database.collection(collectionName).find({ '_id': ObjectId(request.body.id) }).then((data) => {
     //   response.status(200).json(data.email);
     // });
