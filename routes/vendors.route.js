@@ -1,7 +1,7 @@
 var crypto = require('crypto');
 var collectionName = 'vendors';
 var _database;
-const sessionDuration = 600000;
+const sessionDuration = 30000;
 
 class VendorRoute {
   getVendors(request, response) {
