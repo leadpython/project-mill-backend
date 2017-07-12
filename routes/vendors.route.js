@@ -72,9 +72,9 @@ class VendorRoute {
   }
   checkSession(request, response) {
     let isSessionDone = false;
-    _database.collection(collectionName).findOne({ '_id': ObjectId(request.body.id) }).then((data) => {
+    _database.collection(collectionName).findOne({ "_id": ObjectId(request.body.id) }).then((data) => {
       response.status(200).json(data.email);
-    })
+    });
   }
   // checkSession(request, response) {
   //   var isSessionDone = false;
