@@ -72,7 +72,7 @@ class VendorRoute {
   }
   checkSession(request, response) {
     let isSessionDone = false;
-    _database.collection(collectionName).findOne( { "email": "leadpython@yahoo.com" }).then((data) => {
+    _database.collection(collectionName).findOne( { "_id": ObjectId((request.body.id).toString()) }).then((data) => {
       response.status(200).json(data);
     });
   }
