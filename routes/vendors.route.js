@@ -72,7 +72,7 @@ class VendorRoute {
   }
   checkSession(request, response) {
     let isSessionDone = false;
-    _database.collection(collectionName).findOne( { "_id": ObjectId((request.body.id).toString()) }).then((data) => {
+    _database.collection(collectionName).findOne( { "_id": "5962cf4aea8f4a00119b1e94" }).then((data) => {
       response.status(200).json(data);
     });
   }
