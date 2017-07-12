@@ -71,7 +71,14 @@ class VendorRoute {
     }); 
   }
   checkSession(request, response) {
-    response.status(200).json("HELLO WORLD!");
+    let isSessionDone = false;
+    _database.collection(collectionName).findOne({ '_id': request.body.id }).then((data) => {
+      if (data.token === request.body.token) {
+        response.status(200).json("TOKEN MATCH");
+      } else {
+        response.status(200).json("TOKEN DO NOT MATCH");
+      }
+    })
   }
   // checkSession(request, response) {
   //   var isSessionDone = false;
