@@ -1,6 +1,7 @@
 var crypto = require('crypto');
 var collectionName = 'vendors';
 var _database;
+const sessionDuration = 600000;
 
 class VendorRoute {
   getVendors(request, response) {
@@ -30,7 +31,8 @@ class VendorRoute {
           // generate token 
           authInfo.token = crypto.randomBytes(16).toString('hex');
           authInfo.id = data._id;
-          _database.collection(collectionName).update({ "email": request.body.email }, { $set: { "token": authInfo.token } });
+          _database.collection(collectionName).updateOne({ "email": request.body.email }, { $set: { "token": authInfo.token } });
+          _database.collection(collectionName).updateOne({ "email": request.body.email }, { $set: { "sessionExpiration": (Date.now() + sessionDuration) } });
         }
       }
       // respond with authentication information
@@ -68,6 +70,19 @@ class VendorRoute {
         });
       }
     }); 
+  }
+  checkSession(request, response) {
+    let isSessionDone = false;
+    _database.collection(collectionName).findOne({ '_id': request.body.id }, { 'sessionExpiration': true }).then((data) => {
+      if (data.sessionExpiration < Date.now()) {
+        isSessionDone = true;
+      } else {
+        isSessionDone = false;
+        // update
+        _database.collection(collectionName).updateOne({ '_id': request.body.id }, { $set: { 'sessionExpiration': (Date.now() + sessionDuration) } } );
+      }
+      response.status(200).json(isSessionDone);
+    })
   }
   setDatabase(database) {
     _database = database;
