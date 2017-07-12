@@ -1,4 +1,5 @@
 var crypto = require('crypto');
+var ObjectId = require('mongodb').ObjectId;
 var collectionName = 'vendors';
 var _database;
 const sessionDuration = 30000;
@@ -72,7 +73,7 @@ class VendorRoute {
   }
   checkSession(request, response) {
     let isSessionDone = false;
-    _database.collection(collectionName).findOne( { "_id": {"$oid": "5962cf4aea8f4a00119b1e94"} }).then((data) => {
+    _database.collection(collectionName).findOne({ "_id": ObjectId(request.body.id) }).then((data) => {
       response.status(200).json(data);
     });
   }
