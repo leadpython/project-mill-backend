@@ -73,9 +73,13 @@ class VendorRoute {
   }
   checkSession(request, response) {
     let isSessionDone = false;
+    if (!(request.body.id && requesy.body.token)) {
+      response.status(200).json(true);
+      return;
+    }
     _database.collection(collectionName).findOne({ '_id': request.body.id }, { 'sessionExpiration': true, 'token': true }).then((data) => {
       if (data.token === request.body.token) {
-        if (data.sessionExpiration < Date.now()) {
+        if (Number(data.sessionExpiration) < Date.now()) {
           isSessionDone = true;
         } else {
           isSessionDone = false;
