@@ -17,7 +17,7 @@ router.post('/vendors/login', (request, response) => {
   VendorsRoute.authenticateVendor(request, response);
 });
 
-router.post('/vendors/checkSession', (request, response) => {
+router.post('/vendors/check-session', (request, response) => {
   VendorsRoute.checkSession(request, response);
 });
 

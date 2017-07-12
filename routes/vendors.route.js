@@ -31,7 +31,7 @@ class VendorRoute {
           // generate token 
           authInfo.token = crypto.randomBytes(16).toString('hex');
           authInfo.id = data._id;
-          _database.collection(collectionName).updateOne({ "email": request.body.email }, { $set: { 'token': authInfo.token, 'sessionExpiration': (Date.now() + sessionDuration) } });
+          _database.collection(collectionName).updateOne({ "_id": data._id }, { $set: { 'token': authInfo.token, 'sessionExpiration': (Date.now() + sessionDuration) } });
         }
       }
       // respond with authentication information
@@ -71,11 +71,7 @@ class VendorRoute {
     }); 
   }
   checkSession(request, response) {
-    let isSessionDone = false;
-    if (!(request.body.id && requesy.body.token)) {
-      response.status(200).json(true);
-      return;
-    }
+    var isSessionDone = false;
     _database.collection(collectionName).findOne({ '_id': request.body.id }, { 'sessionExpiration': true, 'token': true }).then((data) => {
       if (data.token === request.body.token) {
         if (Number(data.sessionExpiration) < Date.now()) {
@@ -87,7 +83,7 @@ class VendorRoute {
         }
       }
       response.status(200).json(isSessionDone);
-    })
+    });
   }
   setDatabase(database) {
     _database = database;
