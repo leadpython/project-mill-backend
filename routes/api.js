@@ -11,15 +11,15 @@ router.get('/vendors', (request, response) => {
 
 router.post('/vendors/register', (request, response) => {
   VendorsRoute.registerVendor(request, response);
-})
+});
 
 router.post('/vendors/login', (request, response) => {
   VendorsRoute.authenticateVendor(request, response);
-})
+});
 
 router.post('/vendors/checkSession', (request, response) => {
   VendorsRoute.checkSession(request, response);
-})
+});
 
 router.put('/vendors/:id', (request, response) => {
   VendorsRoute.updateVendor(request, response);
