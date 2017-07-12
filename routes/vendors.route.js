@@ -73,13 +73,15 @@ class VendorRoute {
   }
   checkSession(request, response) {
     let isSessionDone = false;
-    _database.collection(collectionName).findOne({ '_id': request.body.id }, { 'sessionExpiration': true }).then((data) => {
-      if (data.sessionExpiration < Date.now()) {
-        isSessionDone = true;
-      } else {
-        isSessionDone = false;
-        // update
-        _database.collection(collectionName).updateOne({ '_id': request.body.id }, { $set: { 'sessionExpiration': (Date.now() + sessionDuration) } } );
+    _database.collection(collectionName).findOne({ '_id': request.body.id }, { 'sessionExpiration': true, 'token': true }).then((data) => {
+      if (data.token === request.body.token) {
+        if (data.sessionExpiration < Date.now()) {
+          isSessionDone = true;
+        } else {
+          isSessionDone = false;
+          // update
+          _database.collection(collectionName).updateOne({ '_id': request.body.id }, { $set: { 'sessionExpiration': (Date.now() + sessionDuration) } } );
+        }
       }
       response.status(200).json(isSessionDone);
     })
