@@ -2,7 +2,7 @@ var crypto = require('crypto');
 var ObjectId = require('mongodb').ObjectId;
 var collectionName = 'vendors';
 var _database;
-const sessionDuration = 30000;
+const sessionDuration = 10000;
 
 class VendorRoute {
   getVendors(request, response) {
@@ -80,7 +80,7 @@ class VendorRoute {
         } else {
           isSessionDone = false;
           // update
-          _database.collection(collectionName).updateOne({ '_id': request.body.id }, { $set: { 'sessionExpiration': (Date.now() + sessionDuration) } } );
+          _database.collection(collectionName).updateOne({ '_id': ObjectId(request.body.id) }, { $set: { 'sessionExpiration': (Date.now() + sessionDuration) } } );
         }
       }
       response.status(200).json(isSessionDone);
