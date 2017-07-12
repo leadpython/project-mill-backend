@@ -13,11 +13,11 @@ router.post('/vendors/register', (request, response) => {
   VendorsRoute.registerVendor(request, response);
 });
 
-router.post('/vendors/login', (request, response) => {
+router.put('/vendors/login', (request, response) => {
   VendorsRoute.authenticateVendor(request, response);
 });
 
-router.post('/vendors/check-session', (request, response) => {
+router.put('/vendors/check-session', (request, response) => {
   VendorsRoute.checkSession(request, response);
 });
 

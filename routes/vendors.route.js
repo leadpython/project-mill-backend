@@ -32,7 +32,7 @@ class VendorRoute {
           // generate token 
           authInfo.token = crypto.randomBytes(16).toString('hex');
           authInfo.id = data._id;
-          _database.collection(collectionName).updateOne({ "_id": data._id }, { $set: { 'token': authInfo.token, 'sessionExpiration': (Date.now() + sessionDuration) } });
+          _database.collection(collectionName).updateOne({ '_id': data._id }, { $set: { 'token': authInfo.token, 'sessionExpiration': (Date.now() + sessionDuration) } });
         }
       }
       // respond with authentication information
@@ -46,7 +46,7 @@ class VendorRoute {
       doesUserExist: false,
       registrationSuccess: false
     };
-    _database.collection(collectionName).findOne({ "email": request.body.email }).then((data) => {
+    _database.collection(collectionName).findOne({ 'email': request.body.email }).then((data) => {
       if (data) {
         regInfo.doesUserExist = true;
         response.status(200).json(regInfo);
@@ -72,26 +72,20 @@ class VendorRoute {
     }); 
   }
   checkSession(request, response) {
-    let isSessionDone = false;
-    _database.collection(collectionName).findOne({ "_id": ObjectId(request.body.id) }).then((data) => {
-      response.status(200).json(data);
+    var isSessionDone = false;
+    _database.collection(collectionName).findOne({ '_id': ObjectId(request.body.id) }, { 'sessionExpiration': true, 'token': true }).then((data) => {
+      if (data.token === request.body.token) {
+        if (Number(data.sessionExpiration) < Date.now()) {
+          isSessionDone = true;
+        } else {
+          isSessionDone = false;
+          // update
+          _database.collection(collectionName).updateOne({ '_id': request.body.id }, { $set: { 'sessionExpiration': (Date.now() + sessionDuration) } } );
+        }
+      }
+      response.status(200).json(isSessionDone);
     });
   }
-  // checkSession(request, response) {
-  //   var isSessionDone = false;
-  //   _database.collection(collectionName).findOne({ '_id': request.body.id }, { 'sessionExpiration': true, 'token': true }).then((data) => {
-  //     if (data.token === request.body.token) {
-  //       if (Number(data.sessionExpiration) < Date.now()) {
-  //         isSessionDone = true;
-  //       } else {
-  //         isSessionDone = false;
-  //         // update
-  //         _database.collection(collectionName).updateOne({ '_id': request.body.id }, { $set: { 'sessionExpiration': (Date.now() + sessionDuration) } } );
-  //       }
-  //     }
-  //     response.status(200).json(isSessionDone);
-  //   });
-  // }
   setDatabase(database) {
     _database = database;
   }
