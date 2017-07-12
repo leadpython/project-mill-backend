@@ -72,10 +72,10 @@ class VendorRoute {
   }
   checkSession(request, response) {
     let isSessionDone = false;
-    response.status(200).json(request.body.id)
-    // _database.collection(collectionName).find({ '_i': ObjectId(request.body.id) }).then((data) => {
-    //   response.status(200).json(data.email);
-    // });
+    response.status(200).json(typeof request.body.id)
+    _database.collection(collectionName).find({ '_id': ObjectId(request.body.id) }).then((data) => {
+      response.status(200).json(data.email);
+    });
   }
   // checkSession(request, response) {
   //   var isSessionDone = false;
