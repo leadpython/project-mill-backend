@@ -2,9 +2,12 @@ var crypto = require('crypto');
 var ObjectId = require('mongodb').ObjectId;
 var collectionName = 'vendors';
 var _database;
-const sessionDuration = 10000;
+const sessionDuration = 60000;
 
 class VendorRoute {
+  getVendor(request, response) {
+    response.status(200).json(request.query.id)
+  }
   getVendors(request, response) {
     let vendors = _database.collection(collectionName).find({}).toArray((error, data) => {
       response.status(200).json(data);
@@ -77,9 +80,12 @@ class VendorRoute {
       if (data.token === request.body.token) {
         if (Number(data.sessionExpiration) < Date.now()) {
           isSessionDone = true;
+          // eliminate token
+          _database.collection(collectionName).updateOne({ '_id': ObjectId(request.body.id) }, { $set: { 'token': crypto.randomBytes(16).toString('hex') } } );
+          _data
         } else {
           isSessionDone = false;
-          // update
+          // reset session expiration, 10 more minutes
           _database.collection(collectionName).updateOne({ '_id': ObjectId(request.body.id) }, { $set: { 'sessionExpiration': (Date.now() + sessionDuration) } } );
         }
       }
