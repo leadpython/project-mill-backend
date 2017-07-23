@@ -15,8 +15,6 @@ class VendorRoute {
   }
   updateVendor(request, response) {
   }
-  deleteVendor(request, response) {
-  }
   authenticateVendor(request, response) {
     // collects information regarding authentication
     let authInfo = {
@@ -66,6 +64,8 @@ class VendorRoute {
         };
         _database.collection(collectionName).insertOne(userRecord).then((data) => {
           regInfo.registrationSuccess = true;
+          regInfo.email = request.body.email;
+          regInfo = request.body.password;
           response.status(201).json(regInfo);
         }, (error) => {
           regInfo.registrationSuccess = false;

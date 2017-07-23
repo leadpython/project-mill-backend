@@ -9,7 +9,7 @@ router.get('/vendors', (request, response) => {
   VendorsRoute.getVendors(request, response);
 });
 
-router.get('/:id', (request, response) => {
+router.get('/user/:id', (request, response) => {
   VendorsRoute.getVendor(request, response);
 });
 
@@ -27,10 +27,6 @@ router.put('/vendors/check-session', (request, response) => {
 
 router.put('/vendors/:id', (request, response) => {
   VendorsRoute.updateVendor(request, response);
-});
-
-router.delete('/vendors/:id', (request, response) => {
-  VendorsRoute.deleteVendor(request, response);
 });
 
 module.exports = router;
