@@ -23,7 +23,9 @@ class VendorRoute {
       duration: request.body.duration
     }
     _database.collection(collectionName).updateOne({ '_id': ObjectId(request.body.id) }, { $push: { services: service } }).then((data) => {
-      response.status(200).json(data);
+      _database.collection(collectionName).find( { '_id': ObjectId(request.body.id) }, { services: 1 }).then((data) => {
+        response.status(200).json(data);
+      })
     })
   }
   authenticateVendor(request, response) {
