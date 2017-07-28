@@ -9,7 +9,7 @@ router.get('/vendors', (request, response) => {
   VendorsRoute.getVendors(request, response);
 });
 
-router.get('/vendors/get-services', (request, response) => {
+router.get('/vendors/:id/get-services', (request, response) => {
   VendorsRoute.getVendorServices(request, response);
 });
 
