@@ -15,6 +15,11 @@ class VendorRoute {
   }
   updateVendor(request, response) {
   }
+  getVendorServices(request, response) {
+    _database.collection(collectionName).findOne({ '_id': ObjectId(request.body.id) }).then((data) => {
+      response.status(200).json(data.services);
+    })
+  }
   addServiceToVendor(request, response) {
     let service = {
       name: request.body.name,
