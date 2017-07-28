@@ -23,8 +23,8 @@ class VendorRoute {
       duration: request.body.duration
     }
     _database.collection(collectionName).updateOne({ '_id': ObjectId(request.body.id) }, { $push: { services: service } }).then((data) => {
-      _database.collection(collectionName).findOne( { '_id': ObjectId(request.body.id) }).then((data) => {
-        response.status(200).json(data.services);
+      _database.collection(collectionName).findOne( { '_id': ObjectId(request.body.id) }, { 'services': true }).then((data) => {
+        response.status(200).json(data);
       })
     })
   }
