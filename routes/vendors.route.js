@@ -15,11 +15,17 @@ class VendorRoute {
       response.status(200).json(data);
     })
   }
+  getVendorAppointments(request, response) {
+    _database.collection(collectionName).findOne({ '_id': ObjectId(request.params.id) }, { 'appointments': true }).then((data) => {
+      response.status(200).json(data);
+    })
+  }
   addServiceToVendor(request, response) {
     let service = {
       name: request.body.name,
       cost: request.body.cost,
-      duration: request.body.duration
+      duration: request.body.duration,
+      serviceId: crypto.randomBytes(16).toString('hex')
     }
     _database.collection(collectionName).updateOne({ '_id': ObjectId(request.body.id) }, { $push: { services: service } }).then((data) => {
       _database.collection(collectionName).findOne( { '_id': ObjectId(request.body.id) }, { 'services': true }).then((data) => {

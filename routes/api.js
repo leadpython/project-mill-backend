@@ -13,6 +13,10 @@ router.get('/vendors/:id/get-services', (request, response) => {
   VendorsRoute.getVendorServices(request, response);
 });
 
+router.get('/vendors/:id/get-appointments', (request, response) => {
+  VendorsRoute.getVendorAppointments(request, response);
+});
+
 router.post('/vendors/add-service', (request, response) => {
   VendorsRoute.addServiceToVendor(request, response);
 });
