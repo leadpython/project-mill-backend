@@ -21,7 +21,7 @@ class VendorRoute {
       cost: request.body.cost,
       duration: request.body.duration
     }
-    _database.collection(collectionName).updateOne({ '_id': request.body.id }, { $push: { services: service } }).then((data) => {
+    _database.collection(collectionName).updateOne({ '_id': ObjectId(request.body.id) }, { $push: { services: service } }).then((data) => {
       response.status(200).json(data);
     })
   }
@@ -64,13 +64,16 @@ class VendorRoute {
       } else {
         let salt = crypto.randomBytes(16).toString('hex');
         let userRecord = {
+          username: request.body.username,
           email: request.body.email,
           credentials: {
             salt: salt,
             hash: crypto.pbkdf2Sync(request.body.password, salt, 1000, 64).toString('hex')
           },
           firstname: request.body.firstname,
-          lastname: request.body.lastname
+          lastname: request.body.lastname,
+          services: [],
+          appointments: []
         };
         _database.collection(collectionName).insertOne(userRecord).then((data) => {
           regInfo.registrationSuccess = true;
