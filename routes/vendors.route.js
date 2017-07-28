@@ -11,7 +11,7 @@ class VendorRoute {
     });
   }
   getVendorServices(request, response) {
-    response.status(200).json(request.body.id)
+    response.status(200).json("hello world!")
     // _database.collection(collectionName).findOne({ '_id': request.body.id }).then((data) => {
     //   response.status(200).json(data);
     // })
