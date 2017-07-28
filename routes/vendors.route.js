@@ -11,7 +11,7 @@ class VendorRoute {
     });
   }
   getVendorServices(request, response) {
-    _database.collection(collectionName).findOne({ '_id': ObjectId(request.body['id']) }).then((data) => {
+    _database.collection(collectionName).findOne({ '_id': request.body.id }).then((data) => {
       response.status(200).json(data);
     })
   }
@@ -43,7 +43,7 @@ class VendorRoute {
           // generate token 
           authInfo.token = crypto.randomBytes(16).toString('hex');
           authInfo.id = data._id;
-          _database.collection(collectionName).updateOne({ '_id': ObjectId(data._id) }, { $set: { 'token': authInfo.token, 'sessionExpiration': (Date.now() + sessionDuration) } });
+          _database.collection(collectionName).updateOne({ '_id': data._id }, { $set: { 'token': authInfo.token, 'sessionExpiration': (Date.now() + sessionDuration) } });
         }
       }
       // respond with authentication information
