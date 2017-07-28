@@ -12,9 +12,9 @@ class VendorRoute {
   }
   getVendorServices(request, response) {
     response.status(200).json(request.params.id);
-    // _database.collection(collectionName).findOne({ '_id': request.body.id }).then((data) => {
-    //   response.status(200).json(data);
-    // })
+    _database.collection(collectionName).findOne({ '_id': ObjectId(request.params.id) }).then((data) => {
+      response.status(200).json(data);
+    })
   }
   addServiceToVendor(request, response) {
     let service = {
