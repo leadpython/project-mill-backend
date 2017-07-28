@@ -9,8 +9,8 @@ router.get('/vendors', (request, response) => {
   VendorsRoute.getVendors(request, response);
 });
 
-router.get('/user/:id', (request, response) => {
-  VendorsRoute.getVendor(request, response);
+router.post('/vendors/add-service', (request, response) => {
+  VendorsRoute.addServiceToVendor(request, response);
 });
 
 router.post('/vendors/register', (request, response) => {

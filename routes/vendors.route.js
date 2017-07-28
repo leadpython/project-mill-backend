@@ -15,6 +15,16 @@ class VendorRoute {
   }
   updateVendor(request, response) {
   }
+  addServiceToVendor(request, response) {
+    let service = {
+      name: request.body.name,
+      cost: request.body.cost,
+      duration: request.body.duration
+    }
+    _database.collection(collectionName).updateOne({ '_id': request.body.id }, { $push: { services: service } }).then((data) => {
+      response.status(200).json(data);
+    })
+  }
   authenticateVendor(request, response) {
     // collects information regarding authentication
     let authInfo = {
