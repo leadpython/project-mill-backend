@@ -12,17 +12,17 @@ class VendorRoute {
   }
   searchVendors(request, response) {
     let regex = new RegExp(request.params.input);
-    let searchInput = {
-      'username': { $regex: regex },
-      // 'firstname': { $regex: regex },
-      // 'lastname': { $regex: regex }
-    };
+    let searchInput = [
+      {'username': { $regex: regex }},
+      { 'firstname': { $regex: regex }},
+      {'lastname': { $regex: regex }}
+    ];
     let options = {
       'username': true,
       'firstname': true,
       'lastname': true,
     };
-    _database.collection(collectionName).find(searchInput, options).toArray((error, data) => {
+    _database.collection(collectionName).find({ $or: searchInput }, options).toArray((error, data) => {
 
       response.status(200).json(data); 
     });
