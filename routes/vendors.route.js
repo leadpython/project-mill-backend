@@ -11,7 +11,7 @@ class VendorRoute {
     });
   }
   searchVendors(request, response) {
-    let regex = new RegExp(request.params.input);
+    let regex = new RegExp(request.params.input, 'i');
     let searchInput = [
       {'username': { $regex: regex }},
       { 'firstname': { $regex: regex }},
