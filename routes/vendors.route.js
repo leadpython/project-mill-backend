@@ -14,8 +14,8 @@ class VendorRoute {
     let regex = new RegExp(request.params.input);
     let searchInput = {
       'username': { $regex: regex },
-      'firstname': { $regex: regex },
-      'lastname': { $regex: regex }
+      // 'firstname': { $regex: regex },
+      // 'lastname': { $regex: regex }
     };
     let options = {
       'username': true,
@@ -23,6 +23,7 @@ class VendorRoute {
       'lastname': true,
     };
     _database.collection(collectionName).find( { $or: searchInput }, options).toArray((error, data) => {
+
       response.status(200).json(data); 
     });
   }
