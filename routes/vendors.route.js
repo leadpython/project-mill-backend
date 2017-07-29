@@ -10,6 +10,21 @@ class VendorRoute {
       response.status(200).json(data);
     });
   }
+  searchVendors(request, response) {
+    let searchInput = {
+      'username': { $regex: `.*${request.params.input}.*`},
+      'firstname': { $regex: `.*${request.params.input}.*`},
+      'lastname': { $regex: `.*${request.params.input}.*`},
+    };
+    let options = {
+      'username': true,
+      'firstname': true,
+      'lastname': true,
+    };
+    _database.collection(collectionName).find(searchInput, options).toArray((error, data) => {
+      response.status(200).json(data);
+    });
+  }
   getVendorServices(request, response) {
     _database.collection(collectionName).findOne({ '_id': ObjectId(request.params.id) }, { 'services': true }).then((data) => {
       response.status(200).json(data);
@@ -18,7 +33,7 @@ class VendorRoute {
   getVendorAppointments(request, response) {
     _database.collection(collectionName).findOne({ '_id': ObjectId(request.params.id) }, { 'appointments': true }).then((data) => {
       response.status(200).json(data);
-    })
+    });
   }
   addServiceToVendor(request, response) {
     let service = {

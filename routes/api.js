@@ -9,11 +9,16 @@ router.get('/vendors', (request, response) => {
   VendorsRoute.getVendors(request, response);
 });
 
-router.get('/vendors/:id/get-services', (request, response) => {
+router.get('/vendors/searchVendors/:input', (request, response) => {
+  VendorsRoute.searchVendors(request, response);
+});
+
+
+router.get('/vendors/get-services/:id', (request, response) => {
   VendorsRoute.getVendorServices(request, response);
 });
 
-router.get('/vendors/:id/get-appointments', (request, response) => {
+router.get('/vendors/get-appointments/:id', (request, response) => {
   VendorsRoute.getVendorAppointments(request, response);
 });
 
