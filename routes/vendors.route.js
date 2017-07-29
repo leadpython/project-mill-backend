@@ -22,7 +22,7 @@ class VendorRoute {
       'firstname': true,
       'lastname': true,
     };
-    _database.collection(collectionName).find( { $or: searchInput }, options).toArray((error, data) => {
+    _database.collection(collectionName).find(searchInput, options).toArray((error, data) => {
 
       response.status(200).json(data); 
     });
