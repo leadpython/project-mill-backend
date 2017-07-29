@@ -12,7 +12,7 @@ class VendorRoute {
   }
   searchVendors(request, response) {
     let searchInput = {
-      'username': /request.params.input$/
+      'username': /request.params.input/
       // 'firstname': { $regex: '.*'+request.params.input+'.*'},
       // 'lastname': { $regex: '.*'+request.params.input+'.*'},
     };
